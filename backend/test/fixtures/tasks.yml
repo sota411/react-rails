@@ -1,0 +1,7 @@
+open_task:
+  title: Networkを見る
+  done: false
+
+finished_task:
+  title: Railsを起動する
+  done: true
