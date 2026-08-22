@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">ReactとRailsを学ぶ9駅のコースマップ</title>
+  <desc id="desc">起動から模擬インターンまで、学習内容を地下鉄路線のように示す</desc>
+  <style>
+    .bg{fill:#f5f1e8}.ink{fill:#20322f}.muted{fill:#66736f}.line{fill:none;stroke:#2b7a68;stroke-width:14;stroke-linecap:round;stroke-linejoin:round}.station{fill:#fffdf8;stroke:#2b7a68;stroke-width:7}.now{fill:#ef744b;stroke:#20322f;stroke-width:5}.label{font-family:system-ui,"Noto Sans JP",sans-serif;font-size:22px;font-weight:700;fill:#20322f}.small{font-family:system-ui,"Noto Sans JP",sans-serif;font-size:14px;fill:#66736f}.num{font-family:Georgia,serif;font-size:23px;font-weight:700;text-anchor:middle;dominant-baseline:middle}.title{font-family:Georgia,"Yu Mincho",serif;font-size:42px;font-weight:500;fill:#20322f}.eyebrow{font-family:monospace;font-size:13px;letter-spacing:3px;fill:#2b7a68}.card{fill:#fffdf8;stroke:#d6d1c6;stroke-width:2}
+  </style>
+  <rect width="1200" height="520" class="bg"/>
+  <text x="60" y="58" class="eyebrow">LEARNING LINE / 9 STATIONS</text>
+  <text x="60" y="105" class="title">画面からDBまで、一本の路線で覚える</text>
+  <path class="line" d="M90 330 H220 Q270 330 270 280 V230 Q270 180 320 180 H520 Q570 180 570 230 V300 Q570 350 620 350 H850 Q900 350 900 300 V235 Q900 185 950 185 H1110"/>
+
+  <g transform="translate(90 330)"><circle r="30" class="now"/><text class="num" fill="#fff">0</text><text x="-20" y="62" class="label">起動</text><text x="-26" y="84" class="small">全体地図</text></g>
+  <g transform="translate(270 260)"><circle r="27" class="station"/><text class="num">1</text><text x="-88" y="-48" class="label">JavaScript</text><text x="-71" y="-27" class="small">値と関数</text></g>
+  <g transform="translate(390 180)"><circle r="27" class="station"/><text class="num">2</text><text x="-42" y="-48" class="label">部品</text><text x="-61" y="-27" class="small">propsで渡す</text></g>
+  <g transform="translate(520 180)"><circle r="27" class="station"/><text class="num">3</text><text x="-43" y="-48" class="label">記憶</text><text x="-45" y="-27" class="small">state</text></g>
+  <g transform="translate(570 300)"><circle r="27" class="station"/><text class="num">4</text><text x="-94" y="72" class="label">Rails受付</text><text x="-86" y="94" class="small">Route → Controller</text></g>
+  <g transform="translate(700 350)"><circle r="27" class="station"/><text class="num">5</text><text x="-40" y="72" class="label">保存</text><text x="-50" y="94" class="small">Model・DB</text></g>
+  <g transform="translate(850 350)"><circle r="27" class="station"/><text class="num">6</text><text x="-53" y="72" class="label">接続</text><text x="-58" y="94" class="small">HTTP・JSON</text></g>
+  <g transform="translate(900 235)"><circle r="27" class="station"/><text class="num">7</text><text x="-78" y="-48" class="label">縦に通す</text><text x="-71" y="-27" class="small">priority機能</text></g>
+  <g transform="translate(1110 185)"><circle r="31" class="station"/><path d="M-11 -2 l8 8 16-20" fill="none" stroke="#2b7a68" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text x="-92" y="-48" class="label">模擬インターン</text><text x="-63" y="-27" class="small">証拠から直す</text></g>
+
+  <g transform="translate(60 425)">
+    <rect width="390" height="64" rx="10" class="card"/>
+    <circle cx="34" cy="32" r="13" class="now"/>
+    <text x="60" y="27" class="label" font-size="17">現在地はオレンジ</text>
+    <text x="60" y="48" class="small">各駅で「予想 → 実装 → 観察 → 説明 → 確認」</text>
+  </g>
+</svg>
