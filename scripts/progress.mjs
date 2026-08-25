@@ -11,8 +11,7 @@ const text = await readFile(progressPath, "utf8");
 const lessonLines = [...text.matchAll(/^- \[([ xX])\] Lesson (\d+): (.+)$/gm)];
 const completed = lessonLines.filter((match) => match[1].toLowerCase() === "x").length;
 const total = lessonLines.length;
-const currentLesson = text.match(/current_lesson:\s*(\d+)/)?.[1] ?? "?";
-const codexMode = text.match(/codex_mode:\s*([a-z]+)/)?.[1] ?? "?";
+const selectedLesson = text.match(/selected_lesson:\s*(\d+|none)/)?.[1] ?? "none";
 const barWidth = 18;
 const filled = total === 0 ? 0 : Math.round((completed / total) * barWidth);
 const bar = "█".repeat(filled) + "░".repeat(barWidth - filled);
@@ -20,20 +19,20 @@ const bar = "█".repeat(filled) + "░".repeat(barWidth - filled);
 console.log("\nReact × Rails 学習進捗");
 console.log("------------------------------");
 console.log(`[${bar}] ${completed}/${total} Lesson`);
-console.log(`現在のLesson: ${currentLesson}`);
-console.log(`Codexモード: ${codexMode}`);
+console.log(`選択中: ${selectedLesson === "none" ? "未選択" : `Lesson ${selectedLesson}`}`);
 
 if (existsSync(scorePath)) {
   const score = JSON.parse(await readFile(scorePath, "utf8"));
-  console.log(`直近のクイズ: Lesson ${score.lesson}・${score.percentage}% ${score.passed ? "✓" : "要復習"}`);
+  console.log(`直近のクイズ: Lesson ${score.lesson}・${score.percentage}%`);
 }
 
-console.log("\n未完了:");
+console.log("\nLesson:");
 for (const match of lessonLines) {
-  if (match[1].toLowerCase() !== "x") {
-    const marker = String(match[2]) === String(currentLesson) ? "→" : " ";
-    console.log(`${marker} Lesson ${match[2]}: ${match[3]}`);
-  }
+  const isDone = match[1].toLowerCase() === "x";
+  const isSelected = String(match[2]) === String(selectedLesson);
+  const marker = isSelected ? "→" : " ";
+  const state = isDone ? "✓" : " ";
+  console.log(`${marker} [${state}] Lesson ${match[2]}: ${match[3]}`);
 }
 
-console.log("\nチェックを変えるのは学習者本人です。\n");
+console.log("\nLessonの選択と完了判定は学習者が行います。\n");

@@ -1,0 +1,71 @@
+#!/usr/bin/env sh
+set -eu
+
+ROOT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+cd "$ROOT_DIR"
+
+fail() {
+  printf '\n開始できません: %s\n' "$1" >&2
+  exit 1
+}
+
+command -v docker >/dev/null 2>&1 || fail "Dockerが見つかりません。Dockerをインストールしてから、もう一度 ./learn を実行してください。"
+docker compose version >/dev/null 2>&1 || fail "docker compose が使えません。Docker Composeを有効にしてください。"
+docker info >/dev/null 2>&1 || fail "Dockerが起動していません。Dockerを起動してから、もう一度 ./learn を実行してください。"
+command -v codex >/dev/null 2>&1 || fail "Codex CLIが見つかりません。Codex CLIをインストールしてログインしてください。"
+
+cleanup() {
+  printf '\nReactとRailsを停止しています。\n'
+  docker compose down --remove-orphans >/dev/null 2>&1 || true
+}
+trap cleanup EXIT
+trap 'exit 130' INT TERM HUP
+
+printf '\nReactとRailsを起動しています。\n'
+docker compose up --build -d --remove-orphans
+
+check_url() {
+  url=$1
+  label=$2
+  count=0
+
+  while [ "$count" -lt 120 ]; do
+    if command -v curl >/dev/null 2>&1; then
+      if curl --fail --silent --show-error "$url" >/dev/null 2>&1; then
+        return 0
+      fi
+    elif command -v wget >/dev/null 2>&1; then
+      if wget --quiet --output-document=/dev/null "$url"; then
+        return 0
+      fi
+    else
+      sleep 5
+      return 0
+    fi
+
+    count=$((count + 1))
+    sleep 1
+  done
+
+  docker compose ps >&2 || true
+  docker compose logs --tail=80 >&2 || true
+  fail "$label の起動を確認できませんでした。上のログを確認してください。"
+}
+
+check_url "http://localhost:3000/api/v1/health" "Rails API"
+check_url "http://localhost:5173" "React画面"
+
+COURSE_URL="http://localhost:5173"
+
+if command -v xdg-open >/dev/null 2>&1; then
+  xdg-open "$COURSE_URL" >/dev/null 2>&1 &
+elif command -v open >/dev/null 2>&1; then
+  open "$COURSE_URL" >/dev/null 2>&1 &
+elif command -v cmd.exe >/dev/null 2>&1; then
+  cmd.exe /C start "" "$COURSE_URL" >/dev/null 2>&1 &
+else
+  printf '\nブラウザで %s を開いてください。\n' "$COURSE_URL"
+fi
+
+printf '\n起動しました。Codexで学ぶLessonを選んでください。\n\n'
+codex "$(cat docs/codex/start-prompt.txt)"

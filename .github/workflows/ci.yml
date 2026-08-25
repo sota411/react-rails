@@ -7,13 +7,14 @@ on:
 
 jobs:
   course-structure:
-    name: 教材の構造とクイズ
+    name: 教材の入口・構造・クイズ
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: sh -n learn
       - run: node scripts/check-structure.mjs
       - run: node scripts/bug-lab.mjs --list
       - run: node scripts/progress.mjs
