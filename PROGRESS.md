@@ -1,70 +1,42 @@
 # 学習進捗
 
 ```yaml
-current_lesson: 0
-codex_mode: coach
+selected_lesson: none
 ```
 
-`codex_mode` は `coach` → `pair` → `reviewer` → `implementer` のいずれかです。最初は `coach` のまま始めます。
+Lessonの選択と完了判定は学習者が行います。
+Codexは、明示的な了承があった場合だけこのfileを更新します。
 
 ## Lesson
 
-- [ ] Lesson 0: 全体地図と起動
-- [ ] Lesson 1: JavaScriptの最低限
-- [ ] Lesson 2: Reactの部品
-- [ ] Lesson 3: Reactが覚える仕組み
-- [ ] Lesson 4: Railsが受付する仕組み
-- [ ] Lesson 5: Railsが保存する仕組み
-- [ ] Lesson 6: ReactとRailsをつなぐ
-- [ ] Lesson 7: priority機能を縦に通す
-- [ ] Lesson 8: バグ調査と模擬インターン
+- [ ] Lesson 0: 起動と全体の実行経路
+- [ ] Lesson 1: JavaScriptの関数と配列
+- [ ] Lesson 2: React Componentとprops
+- [ ] Lesson 3: stateと再レンダー
+- [ ] Lesson 4: Rails RouteとController
+- [ ] Lesson 5: Model、migration、validation、DB
+- [ ] Lesson 6: ReactとRailsのHTTP通信
+- [ ] Lesson 7: priority機能の縦断実装
+- [ ] Lesson 8: errorの切り分け
 
-## 自分の言葉メモ
+## 自分の言葉で説明した内容
 
-Lesson終了時に1〜3文で書きます。「何を受け取り、何をし、何を返すか」を含めてください。
-
-### Lesson 0
-
-まだ記入していません。
-
-### Lesson 1
-
-まだ記入していません。
-
-### Lesson 2
-
-まだ記入していません。
-
-### Lesson 3
-
-まだ記入していません。
-
-### Lesson 4
-
-まだ記入していません。
-
-### Lesson 5
-
-まだ記入していません。
-
-### Lesson 6
-
-まだ記入していません。
-
-### Lesson 7
-
-まだ記入していません。
-
-### Lesson 8
-
-まだ記入していません。
-
-## 質問ログ
+選んだLessonについて、実際に確認した因果関係を1〜3文で記録します。
 
 ```text
-やろうとしたこと:
-予想していた結果:
-実際に起きたこと:
-確認した場所（画面 / Console / Network / Railsログ / DB）:
-分からない点:
+操作または入力:
+実際に呼ばれたfunction / action:
+変化したdata:
+返った結果:
+画面またはtestで確認したこと:
+```
+
+## 質問メモ
+
+```text
+分からない用語:
+見ているfileと行:
+予想:
+実際の結果:
+確認した証拠:
 ```

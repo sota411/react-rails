@@ -17,7 +17,7 @@ export default function App() {
   const [status, setStatus] = useState("loading");
   const [errorMessage, setErrorMessage] = useState("");
   const [traceStage, setTraceStage] = useState("sending");
-  const [traceAction, setTraceAction] = useState("最初の一覧を取得中");
+  const [traceAction, setTraceAction] = useState("GET /api/v1/tasks を実行中");
   const [traceOpen, setTraceOpen] = useState(true);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function App() {
   async function loadTasks() {
     setStatus("loading");
     setErrorMessage("");
-    setTraceAction("一覧を読み込む GET /api/v1/tasks");
+    setTraceAction("GET /api/v1/tasks でtask一覧を取得");
 
     try {
       const loadedTasks = await getTasks(setTraceStageWithServerWait);
@@ -44,8 +44,8 @@ export default function App() {
     setTraceStage(stage);
 
     if (stage === "sending") {
-      // 通信が180ms以上続いたときだけ「Rails + DB」を現在地にします。
-      // 既にresponseを受け取っていれば、遅れて発火したtimerは画面を後戻りさせません。
+      // 通信が180ms以上続いた場合だけ、教材上のserver段階を表示します。
+      // これは実行計測ではなく、処理順を確認するための表示です。
       window.setTimeout(() => {
         setTraceStage((currentStage) => {
           return currentStage === "sending" ? "server" : currentStage;
@@ -58,7 +58,7 @@ export default function App() {
     setStatus("saving");
     setErrorMessage("");
     setTraceStage("input");
-    setTraceAction(`「${title}」を追加する POST /api/v1/tasks`);
+    setTraceAction(`POST /api/v1/tasks: title="${title}"`);
 
     try {
       const newTask = await createTask(title, setTraceStageWithServerWait);
@@ -77,7 +77,7 @@ export default function App() {
     setStatus("saving");
     setErrorMessage("");
     setTraceStage("input");
-    setTraceAction(`task #${task.id} の完了状態を変える PATCH`);
+    setTraceAction(`PATCH /api/v1/tasks/${task.id}: done=${!task.done}`);
 
     try {
       const changedTask = await updateTask(task, setTraceStageWithServerWait);
@@ -101,7 +101,7 @@ export default function App() {
     setStatus("saving");
     setErrorMessage("");
     setTraceStage("input");
-    setTraceAction(`task #${taskId} を削除する DELETE`);
+    setTraceAction(`DELETE /api/v1/tasks/${taskId}`);
 
     try {
       await deleteTask(taskId, setTraceStageWithServerWait);
@@ -127,12 +127,13 @@ export default function App() {
           <p className="eyebrow">REACT × RAILS PRACTICE</p>
           <h1>Task Bridge</h1>
           <p>
-            画面の操作が、どのコードを通り、どこへ保存されるかを目で追う練習帳。
+            画面操作からHTTP request、Rails、DB保存、React state更新までを、
+            実際のmethod・path・function名で追跡します。
           </p>
         </div>
         <div className="hero__stamp" aria-label="現在の学習テーマ">
           <span>NOW LEARNING</span>
-          <strong>データの旅</strong>
+          <strong>REQUEST FLOW</strong>
         </div>
       </section>
 
@@ -146,8 +147,8 @@ export default function App() {
       <section className="workspace">
         <header className="workspace__header">
           <div>
-            <p className="eyebrow">TODAY'S TASKS</p>
-            <h2>今日の練習</h2>
+            <p className="eyebrow">TASK DATA</p>
+            <h2>task一覧</h2>
           </div>
           <div className="counter" aria-label="タスクの件数">
             <strong>{counts.done}</strong>
@@ -159,10 +160,10 @@ export default function App() {
 
         {errorMessage && (
           <div className="error-card" role="alert">
-            <strong>処理が途中で止まりました</strong>
+            <strong>requestが成功しませんでした</strong>
             <p>{errorMessage}</p>
             <button type="button" onClick={loadTasks}>
-              もう一度一覧を読む
+              GET /api/v1/tasks を再実行
             </button>
           </div>
         )}
@@ -188,7 +189,7 @@ export default function App() {
         {status === "loading" ? (
           <div className="loading-card">
             <span className="loading-card__dot" />
-            Railsからタスクを受け取っています…
+            GET /api/v1/tasks のresponseを待っています…
           </div>
         ) : (
           <TaskList
@@ -202,10 +203,9 @@ export default function App() {
 
       <footer className="page-footer">
         <p>
-          <strong>観察ポイント:</strong> DevToolsのNetworkで{" "}
-          <code>/api/v1/tasks</code> を探す
+          <strong>確認場所:</strong> DevToolsのNetworkで <code>/api/v1/tasks</code> を選ぶ
         </p>
-        <p>Lesson 6で、この往復をコードとログから読み解きます。</p>
+        <p>method、payload、status、responseを実行経路の表示と照合します。</p>
       </footer>
     </main>
   );

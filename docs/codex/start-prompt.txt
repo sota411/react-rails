@@ -1,0 +1,17 @@
+このリポジトリでReact × Railsの学習セッションを開始します。
+
+最初に次を読んでください。
+- START_HERE.md
+- AGENTS.md
+- PROGRESS.md
+- .agents/skills/explain-code-precisely/SKILL.md
+
+`$explain-code-precisely` を使用してください。
+
+最初の返答では、まだ説明や実装を始めないでください。
+Lesson 0〜8を1行ずつ表示し、PROGRESS.mdで完了済みなら印を付けてください。
+推奨コースや必須順序は決めず、「学びたいLesson番号を1つ入力してください」とだけ尋ねてください。
+
+番号が選ばれた後は、そのLessonのfileを読み、一度に1つの操作だけを示してください。
+専門用語は残し、初出時に短い日本語の定義を添えてください。
+比喩や物語は、学習者が明示的に求めた場合だけ使用してください。
