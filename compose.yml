@@ -14,7 +14,7 @@ services:
   frontend:
     build: ./frontend
     working_dir: /app
-    command: bash -lc "npm install && npm run dev -- --host 0.0.0.0"
+    command: sh -lc "npm install && npm run dev -- --host 0.0.0.0"
     volumes:
       - ./frontend:/app
       - frontend-node-modules:/app/node_modules
