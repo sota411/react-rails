@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require "fileutils"
+
+APP_ROOT = File.expand_path("..", __dir__)
+
+def system!(*args)
+  system(*args, exception: true)
+end
+
+FileUtils.chdir APP_ROOT do
+  puts "== gemをインストール =="
+  system!("bundle", "install") unless system("bundle", "check")
+
+  puts "\n== データベースを準備 =="
+  system!("bin/rails", "db:prepare")
+  system!("bin/rails", "db:seed")
+
+  puts "\n== 一時ファイルを削除 =="
+  system!("bin/rails", "tmp:clear", "log:clear")
+
+  puts "\n準備完了。bin/rails server で起動できます。"
+end

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
+  <title id="title">予想、実装、観察、説明、確認の学習ループ</title>
+  <desc id="desc">手と目と口を使い、コードを覚える循環を示す</desc>
+  <style>.bg{fill:#f5f1e8}.ink{fill:#20322f}.muted{fill:#66736f}.ring{fill:none;stroke:#c7d8d2;stroke-width:68}.arrow{fill:none;stroke:#2b7a68;stroke-width:8;stroke-linecap:round}.node{fill:#fffdf8;stroke:#2b7a68;stroke-width:3}.focus{fill:#fff0e9;stroke:#ef744b;stroke-width:4}.title{font-family:Georgia,"Yu Mincho",serif;font-size:40px;fill:#20322f}.label{font-family:system-ui,"Noto Sans JP",sans-serif;font-size:21px;font-weight:750;fill:#20322f;text-anchor:middle}.small{font-family:system-ui,"Noto Sans JP",sans-serif;font-size:14px;fill:#66736f;text-anchor:middle}.icon{font-family:system-ui,sans-serif;font-size:35px;text-anchor:middle;dominant-baseline:middle}.center{fill:#20322f}.centerText{font-family:Georgia,"Yu Mincho",serif;font-size:28px;fill:#fffdf8;text-anchor:middle}.centerSmall{font-family:system-ui,"Noto Sans JP",sans-serif;font-size:14px;fill:#dff3ec;text-anchor:middle}</style>
+  <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#2b7a68"/></marker></defs>
+  <rect width="1000" height="650" class="bg"/>
+  <text x="52" y="58" class="title">覚えるのは「読む量」ではなく、回した回数</text>
+  <circle cx="500" cy="350" r="210" class="ring"/>
+  <path d="M500 120 A230 230 0 0 1 716 270" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M734 316 A230 230 0 0 1 650 548" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M615 570 A230 230 0 0 1 350 548" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M312 518 A230 230 0 0 1 270 270" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M286 224 A230 230 0 0 1 456 122" class="arrow" marker-end="url(#arrow)"/>
+
+  <g transform="translate(500 350)"><circle r="112" class="center"/><text y="-15" class="centerText">自分の理解</text><text y="17" class="centerSmall">間違えても予想を残す</text><text y="43" class="centerSmall">説明できないコードは進まない</text></g>
+  <g transform="translate(500 118)"><circle r="67" class="focus"/><text y="-12" class="icon">?</text><text y="88" class="label">1. 予想</text><text y="109" class="small">動かす前に答える</text></g>
+  <g transform="translate(742 270)"><circle r="62" class="node"/><text y="-4" class="icon">✎</text><text y="86" class="label">2. 小さく書く</text><text y="107" class="small">1つのTODOだけ</text></g>
+  <g transform="translate(650 565)"><circle r="62" class="node"/><text y="-3" class="icon">◉</text><text y="84" class="label">3. 観察</text><text y="105" class="small">画面・Network・log</text></g>
+  <g transform="translate(350 565)"><circle r="62" class="node"/><text y="-2" class="icon">💬</text><text y="84" class="label">4. 説明</text><text y="105" class="small">入力→処理→出力</text></g>
+  <g transform="translate(258 270)"><circle r="62" class="node"/><text y="-2" class="icon">✓</text><text y="86" class="label">5. 確認</text><text y="107" class="small">クイズとテスト</text></g>
+</svg>

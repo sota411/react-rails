@@ -1,0 +1,274 @@
+{
+  "lessons": [
+    {
+      "lesson": 0,
+      "title": "全体地図と起動",
+      "questions": [
+        {
+          "prompt": "ユーザーが直接見る画面のコードは、主にどのディレクトリにありますか？",
+          "choices": ["frontend/", "backend/", "quiz/", "solutions/"],
+          "answer": 0,
+          "explanation": "frontendはユーザーが操作するReact画面です。backendは依頼を受けるRails側です。"
+        },
+        {
+          "prompt": "追加ボタンを押した後の順番として最も近いものはどれですか？",
+          "choices": ["DB → React → Rails", "React → HTTP → Rails → DB → React", "Rails → CSS → DB", "HTTP → React → Git"],
+          "answer": 1,
+          "explanation": "操作はReactから始まり、HTTPでRailsへ届き、DB保存後のJSONをReactが受け取ります。"
+        },
+        {
+          "prompt": "ページを再読み込みしても追加したtaskが残る主な理由は何ですか？",
+          "choices": ["CSSが覚えている", "Consoleが覚えている", "DBへ保存されている", "buttonが覚えている"],
+          "answer": 2,
+          "explanation": "Reactのstateだけなら再読み込みで初期化されます。DBへ保存され、GETで再取得するため残ります。"
+        },
+        {
+          "prompt": "新しいtaskの作成に成功したとき、この教材で返すstatusはどれですか？",
+          "choices": ["201", "404", "422", "500"],
+          "answer": 0,
+          "explanation": "201 Createdは、新しいresourceを作成できたことを表す成功の結果番号です。"
+        }
+      ]
+    },
+    {
+      "lesson": 1,
+      "title": "JavaScriptの最低限",
+      "questions": [
+        {
+          "prompt": "task配列からtitleだけの配列へ変換するとき、最も合う処理はどれですか？",
+          "choices": ["map", "filter", "delete", "fetch"],
+          "answer": 0,
+          "explanation": "mapは各要素を別の形へ変換します。task objectをtitle文字列へ変える場面に合います。"
+        },
+        {
+          "prompt": "未完了のtaskだけを残すとき、最も合う処理はどれですか？",
+          "choices": ["map", "filter", "render", "import"],
+          "answer": 1,
+          "explanation": "filterは条件に合う要素だけを残します。doneがfalseかを条件にします。"
+        },
+        {
+          "prompt": "object `task` のtitleを読む書き方はどれですか？",
+          "choices": ["task/title", "task->title", "task.title", "title.task"],
+          "answer": 2,
+          "explanation": "JavaScriptではobjectの項目をdotでつなぎ、task.titleのように読みます。"
+        },
+        {
+          "prompt": "Reactのstateで元の配列を直接pushせず、新しい配列を作る主な理由は何ですか？",
+          "choices": ["文字数を減らすため", "Reactが変化を追いやすくするため", "HTTPを速くするため", "DBの列を増やすため"],
+          "answer": 1,
+          "explanation": "元の値を直接変更せず新しい値を作ると、Reactが前後の変化を判断しやすくなります。"
+        }
+      ]
+    },
+    {
+      "lesson": 2,
+      "title": "Reactの部品とprops",
+      "questions": [
+        {
+          "prompt": "Componentをこの教材の言葉で最も近く表すとどれですか？",
+          "choices": ["DBの列", "画面の部品", "HTTPの結果番号", "Railsのログ"],
+          "answer": 1,
+          "explanation": "Componentは入力を受け取り、JSXという画面の設計図を返す画面部品です。"
+        },
+        {
+          "prompt": "propsは通常、どちらからどちらへ渡されますか？",
+          "choices": ["子ComponentからDBへ", "親Componentから子Componentへ", "Railsからmigrationへ", "ConsoleからCSSへ"],
+          "answer": 1,
+          "explanation": "親が子を呼ぶときに値やfunctionをpropsとして渡します。子は受け取ったpropsを直接書き換えません。"
+        },
+        {
+          "prompt": "task一覧を描くとき `key={task.id}` を使う理由は何ですか？",
+          "choices": ["文字を太くする", "Reactが各taskを前回と対応付ける", "Railsへidを送る", "CSSを読み込む"],
+          "answer": 1,
+          "explanation": "keyは配列中の画面部品の名札です。安定したDBのidを使うと、Reactが同じ項目を識別できます。"
+        },
+        {
+          "prompt": "別ファイルのTaskCounterをApp.jsxで使うため、最初に必要なのは何ですか？",
+          "choices": ["import", "migration", "validation", "curl"],
+          "answer": 0,
+          "explanation": "importで別ファイルからComponentを受け取り、その後 `<TaskCounter />` として使います。"
+        }
+      ]
+    },
+    {
+      "lesson": 3,
+      "title": "Reactが覚える仕組み",
+      "questions": [
+        {
+          "prompt": "`const [title, setTitle] = useState(\"\")` のsetTitleは何をするものですか？",
+          "choices": ["DBを削除する", "title stateを新しい値へ変える", "propsを作る", "Routeを追加する"],
+          "answer": 1,
+          "explanation": "setTitleへ新しい値を渡すとstateが変わり、Reactはその値を使って画面を再計算します。"
+        },
+        {
+          "prompt": "TaskFormのtitleはpropsとstateのどちらですか？",
+          "choices": ["props", "state", "Route", "Model"],
+          "answer": 1,
+          "explanation": "入力欄の現在値はTaskForm自身が覚えるためstateです。onAddとdisabledは親から来るpropsです。"
+        },
+        {
+          "prompt": "form内で説明開閉用buttonに `type=\"button\"` を付ける理由は何ですか？",
+          "choices": ["文字色を変える", "意図しないsubmitを防ぐ", "DBを初期化する", "propsを固定する"],
+          "answer": 1,
+          "explanation": "form内のbuttonはsubmitとして扱われる場合があります。開閉だけならtype=buttonを明示します。"
+        },
+        {
+          "prompt": "tasksから毎回計算できるdone件数を、別stateへ重複して持たない方がよい主な理由は何ですか？",
+          "choices": ["2つの値がずれる可能性を減らす", "CSSが使えないため", "HTTPが禁止されるため", "Rubyでしか数えられないため"],
+          "answer": 0,
+          "explanation": "元のtasksとdone件数を別々に更新すると同期漏れが起きます。計算できる値は必要時に求める方がずれにくいです。"
+        }
+      ]
+    },
+    {
+      "lesson": 4,
+      "title": "Railsが受付する仕組み",
+      "questions": [
+        {
+          "prompt": "RailsのRouteの役割として最も近いものはどれですか？",
+          "choices": ["methodとpathをControllerへ結ぶ", "画面の色を決める", "DBを画像にする", "Reactのstateを保存する"],
+          "answer": 0,
+          "explanation": "RouteはGETやPOSTとURLの組を、どのController methodへ渡すか決める住所録です。"
+        },
+        {
+          "prompt": "`get \"stats\", to: \"stats#show\"` はどのmethodを呼びますか？",
+          "choices": ["StatsController#create", "StatsController#show", "Task#show", "App#stats"],
+          "answer": 1,
+          "explanation": "`stats#show` の左がController名、右がその中で呼ぶmethod名です。"
+        },
+        {
+          "prompt": "存在しないpathへGETしたとき、最初に多いstatusはどれですか？",
+          "choices": ["201", "204", "404", "422"],
+          "answer": 2,
+          "explanation": "404は届け先や対象が見つからないことを表します。まずmethod・path・routesを比べます。"
+        },
+        {
+          "prompt": "Rails APIのControllerがJSONを返す基本の書き方はどれですか？",
+          "choices": ["render json: value", "console.log(value)", "return <div>", "git push value"],
+          "answer": 0,
+          "explanation": "API Controllerではrender json:でresponse bodyとなるJSONを作ります。"
+        }
+      ]
+    },
+    {
+      "lesson": 5,
+      "title": "Railsが保存する仕組み",
+      "questions": [
+        {
+          "prompt": "migrationの役割として最も近いものはどれですか？",
+          "choices": ["DB構造を変更する手順書", "現在の画面を保存する画像", "HTTPの通信記録", "React Component"],
+          "answer": 0,
+          "explanation": "migrationは列やtableを追加・変更する手順です。実行後の現在形はschemaへ反映されます。"
+        },
+        {
+          "prompt": "`task.save` がvalidationで失敗した場合、通常どこで理由を確認しますか？",
+          "choices": ["task.errors", "window.location", "CSS class", "git branch"],
+          "answer": 0,
+          "explanation": "saveはfalseを返し、validationの失敗理由はtask.errors.full_messagesなどで確認できます。"
+        },
+        {
+          "prompt": "最大100文字を正しく確認する境界testの組み合わせはどれですか？",
+          "choices": ["1文字成功だけ", "100文字成功と101文字失敗", "101文字成功と102文字失敗", "空文字成功だけ"],
+          "answer": 1,
+          "explanation": "境界の内側である100が成功し、外側の101が失敗することを両方固定します。"
+        },
+        {
+          "prompt": "空titleをPOSTし、RouteとControllerには届いたが保存ルールで拒否された場合のstatusはどれですか？",
+          "choices": ["201", "204", "404", "422"],
+          "answer": 3,
+          "explanation": "422はrequestを理解したものの、値が保存条件を満たさない場合に使われます。"
+        }
+      ]
+    },
+    {
+      "lesson": 6,
+      "title": "ReactとRailsをつなぐ",
+      "questions": [
+        {
+          "prompt": "新しいtaskを作るHTTP methodはどれですか？",
+          "choices": ["GET", "POST", "PATCH", "DELETE"],
+          "answer": 1,
+          "explanation": "CreateにはPOSTを使います。GETは読む、PATCHは変更、DELETEは削除です。"
+        },
+        {
+          "prompt": "DELETE成功時の204 responseに対して、避けるべき処理はどれですか？",
+          "choices": ["本文がないのにresponse.json()を呼ぶ", "statusを確認する", "stateから同じidを外す", "Networkを見る"],
+          "answer": 0,
+          "explanation": "204 No Contentにはresponse bodyがありません。JSONとして読もうとすると失敗します。"
+        },
+        {
+          "prompt": "NetworkではPOST 201、RailsログでもCompleted 201なのに画面へ新taskが出ません。最初に見る場所はどれですか？",
+          "choices": ["Reactでresponse後にsetTasksしているか", "Rails Routeがあるか", "migrationファイル名", "Dockerの色"],
+          "answer": 0,
+          "explanation": "通信と保存は成功しています。返ったtaskをReactのstateへ反映する処理を確認します。"
+        },
+        {
+          "prompt": "NetworkがGET /api/v1/taskz = 404で、RailsログにTasksController#indexがありません。最も強い候補はどれですか？",
+          "choices": ["API pathのtypo", "Model validation", "CSSの崩れ", "task titleの長さ"],
+          "answer": 0,
+          "explanation": "Controller到達前で、実際のpathが期待と違います。まずpath定数とroutesを比べます。"
+        }
+      ]
+    },
+    {
+      "lesson": 7,
+      "title": "priority機能を縦に通す",
+      "questions": [
+        {
+          "prompt": "priorityがNetwork Payloadにはあるのに、responseでは常にnormalです。最初に疑う場所はどれですか？",
+          "choices": ["Controllerのpermit", "CSSのfont-size", "Reactのkey", "README"],
+          "answer": 0,
+          "explanation": "Payloadまで届いているなら、Railsが保存用paramsとしてpriorityを許可しているか確認します。"
+        },
+        {
+          "prompt": "画面ではhighと表示されるが、再読み込みするとnormalへ戻ります。何を確認すべきですか？",
+          "choices": ["DB保存とGET response", "buttonの色だけ", "quizの点数", "Gitのusername"],
+          "answer": 0,
+          "explanation": "stateへ一時的に入れただけの可能性があります。DB列、保存値、再取得GETのJSONを確認します。"
+        },
+        {
+          "prompt": "`urgent` のような未定義priorityを拒否する主な担当はどれですか？",
+          "choices": ["Model validation", "CSS", "Route namespace", "React key"],
+          "answer": 0,
+          "explanation": "Modelが保存できる値の集合をvalidationで定義し、失敗時はControllerが422へ変換します。"
+        },
+        {
+          "prompt": "新機能をvertical slice（縦に通す）で考える理由は何ですか？",
+          "choices": ["DB・通信・画面の途中で値が切れないようにする", "ファイル数を必ず1つにする", "testを不要にする", "すべてCSSで実装する"],
+          "answer": 0,
+          "explanation": "ユーザー操作からDB保存、再取得、再表示まで、値が全層を通ることを確認するためです。"
+        }
+      ]
+    },
+    {
+      "lesson": 8,
+      "title": "バグ調査と模擬インターン",
+      "questions": [
+        {
+          "prompt": "不具合調査の最初として最も良い行動はどれですか？",
+          "choices": ["推測で複数ファイルを直す", "再現手順と実際の症状を記録する", "エラーをcatchで隠す", "全依存を更新する"],
+          "answer": 1,
+          "explanation": "まず同じ症状を再現し、期待と実際を固定します。修正は故障層を狭めてからです。"
+        },
+        {
+          "prompt": "証拠を見る推奨順として最も近いものはどれですか？",
+          "choices": ["DB → CSS → README", "画面 → Console → Network → Railsログ → DB", "Git →画像→font", "Model →ユーザー操作→Route"],
+          "answer": 1,
+          "explanation": "ユーザーに近い場所から内側へ進むと、最後に正常だった境界を見つけやすくなります。"
+        },
+        {
+          "prompt": "良い切り分け文はどれですか？",
+          "choices": ["なんとなくRailsが怪しい", "GETは送信済み、pathがtaskzで404、Controller未到達なのでpath誤りを疑う", "全部壊れている", "AIに直してもらう"],
+          "answer": 1,
+          "explanation": "操作・実値・status・到達範囲が含まれ、次に確認する仮説が証拠から導かれています。"
+        },
+        {
+          "prompt": "原因が1行のpath typoだと分かった後、最小修正として良いものはどれですか？",
+          "choices": ["その1行を直し同じ手順とtestで確認する", "ついでに全Componentを改名する", "エラー表示を消す", "Railsを別言語へ置換する"],
+          "answer": 0,
+          "explanation": "関係ない変更を混ぜず、原因に対応する最小差分にするとreviewと再発確認が容易です。"
+        }
+      ]
+    }
+  ]
+}

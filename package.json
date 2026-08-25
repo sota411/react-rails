@@ -1,0 +1,12 @@
+{
+  "name": "react-rails-beginner-course",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "quiz": "node scripts/quiz.mjs",
+    "progress": "node scripts/progress.mjs",
+    "bug:list": "node scripts/bug-lab.mjs --list",
+    "check:structure": "node scripts/check-structure.mjs",
+    "test:basics": "node --test exercises/01-javascript/tasks.test.mjs"
+  }
+}
