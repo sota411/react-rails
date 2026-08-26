@@ -9,10 +9,12 @@ fail() {
   exit 1
 }
 
+printf '\nReact × Rails Hands-on\n'
+printf '========================\n\n'
+printf '[1/3] Dockerを確認しています。\n'
 command -v docker >/dev/null 2>&1 || fail "Dockerが見つかりません。Dockerをインストールしてから、もう一度 ./learn を実行してください。"
 docker compose version >/dev/null 2>&1 || fail "docker compose が使えません。Docker Composeを有効にしてください。"
 docker info >/dev/null 2>&1 || fail "Dockerが起動していません。Dockerを起動してから、もう一度 ./learn を実行してください。"
-command -v codex >/dev/null 2>&1 || fail "Codex CLIが見つかりません。Codex CLIをインストールしてログインしてください。"
 
 cleanup() {
   printf '\nReactとRailsを停止しています。\n'
@@ -21,7 +23,7 @@ cleanup() {
 trap cleanup EXIT
 trap 'exit 130' INT TERM HUP
 
-printf '\nReactとRailsを起動しています。\n'
+printf '[2/3] ReactとRailsを起動しています。初回は依存関係の取得に時間がかかります。\n'
 docker compose up --build -d --remove-orphans
 
 check_url() {
@@ -53,9 +55,10 @@ check_url() {
 }
 
 check_url "http://localhost:3000/api/v1/health" "Rails API"
-check_url "http://localhost:5173" "React画面"
+check_url "http://localhost:5173" "学習画面"
 
 COURSE_URL="http://localhost:5173"
+printf '[3/3] 学習画面を開いています。\n'
 
 if command -v xdg-open >/dev/null 2>&1; then
   xdg-open "$COURSE_URL" >/dev/null 2>&1 &
@@ -67,5 +70,10 @@ else
   printf '\nブラウザで %s を開いてください。\n' "$COURSE_URL"
 fi
 
-printf '\n起動しました。Codexで学ぶLessonを選んでください。\n\n'
-codex "$(cat docs/codex/start-prompt.txt)"
+printf '\n起動しました: %s\n' "$COURSE_URL"
+printf '学習はブラウザ内だけで進みます。Codex CLIは起動しません。\n'
+printf '終了するときは、このTerminalで Ctrl+C を押してください。\n\n'
+
+while :; do
+  sleep 3600
+done
