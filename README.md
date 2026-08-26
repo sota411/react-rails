@@ -1,29 +1,33 @@
 # React × Rails はじめての実務ハンズオン
 
-ReactもRailsも初めての人が、実際にコードを動かしながら学ぶためのリポジトリです。
+ReactとRailsを初めて触る人向けの、ブラウザ完結型ハンズオンです。
 
 ## 始める
 
-初回だけ、リポジトリを取得します。
+初回だけ取得します。
 
 ```bash
 git clone https://github.com/sota411/react-rails.git
 cd react-rails
 ```
 
-以後、開始するときに実行するのはこれだけです。
+学習を始めるときは、リポジトリ直下でこれだけ実行します。
 
 ```bash
 ./learn
 ```
 
-`./learn` は、次をまとめて行います。
+`./learn` がReactとRailsを起動し、学習画面をブラウザで開きます。**Codex CLIは起動しません。**
 
-1. ReactとRailsを起動する
-2. 学習画面をブラウザで開く
-3. Codexを起動し、Lesson 0〜8を表示する
+画面が開いたら、学びたいハンズオンを1本選びます。順番は固定していません。各Stepには常に次が表示されます。
 
-Lessonの順番は固定しません。Codexへ番号を返すと、選んだLessonだけを始めます。
-終了するときはCodexを閉じるか `Ctrl+C` を押します。ReactとRailsも同時に停止します。
+- 今やること
+- 変更または実行する対象
+- 完了条件
+- その場で結果を確認するbutton
 
-必要なものはDockerとCodex CLIです。不足している場合は `./learn` が、その項目だけを表示します。
+コード問題はブラウザ内のsandboxで編集し、決定的なruleで即時判定します。HTTPのStepでは、localhost上のRails APIへ実際にrequestを送ってmethod・path・status・response bodyを確認します。
+
+終了するときは、`./learn` を実行したTerminalで `Ctrl+C` を押します。
+
+必要なものはDockerだけです。
