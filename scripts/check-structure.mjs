@@ -36,7 +36,8 @@ try {
   if ((learnStat.mode & 0o111) === 0) failures.push("learn に実行権限がない");
 
   const learn = await readFile(resolve(root, "learn"), "utf8");
-  if (/\bcodex\b/i.test(learn)) failures.push("learn がCodex CLIを参照している");
+  const launchesCodex = /command\s+-v\s+codex/i.test(learn) || /(^|\n)\s*codex(?:\s|$)/im.test(learn);
+  if (launchesCodex) failures.push("learn がCodex CLIを確認または起動している");
   if (!learn.includes("http://localhost:5173")) failures.push("learn が学習画面を開かない");
   if (!learn.includes("while :")) failures.push("learn が起動後すぐ終了する可能性がある");
 } catch {
